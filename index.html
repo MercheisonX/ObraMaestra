@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Esencial para diseño responsivo y Capacitor. viewport-fit=cover ayuda con las áreas seguras. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ObraMaestra</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./index.css">
+  <style>
+    :root {
+      /* New Theme based on Mockup */
+      --color-primary-bg: #111827;      /* gray-900 - For the body background */
+      --color-primary-app: #0d1421;     /* A deeper blue-gray for the main app frame */
+      --color-secondary-bg: #1f2937;    /* gray-800 - For cards, inputs */
+      --color-border: #374151;          /* gray-700 */
+
+      --color-accent: #22d3ee;           /* cyan-400 */
+      --color-accent-dark: #0e7490;      /* cyan-600 for text on accent bg */
+      --color-accent-transparent: rgba(34, 211, 238, 0.1);
+
+      --color-text-primary: #f3f4f6;     /* gray-100 */
+      --color-text-secondary: #9ca3af;   /* gray-400 */
+      --color-text-muted: #6b7281;       /* gray-500 */
+      
+      --color-success: #34d399;          /* emerald-400 */
+      --color-warning: #f59e0b;          /* amber-500 */
+      --color-danger: #f87171;           /* red-400 */
+      --color-danger-hover: rgba(248, 113, 113, 0.1);
+      
+      --safe-area-inset-top: env(safe-area-inset-top, 0px);
+      --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-area-inset-left: env(safe-area-inset-left, 0px);
+      --safe-area-inset-right: env(safe-area-inset-right, 0px);
+
+      /* === Z-index System (Unchanged) === */
+      --z-index-content-elevated: 10;
+      --z-index-sticky-element: 20;
+      --z-index-page-header: 30;
+      --z-index-bottom-navbar: 40;
+      --z-index-main-header: 50;
+      --z-index-dropdown: 200;
+      --z-index-tooltip: 250;
+      --z-index-portal-root: 600;
+      --z-index-modal-backdrop: 1000;
+      --z-index-modal-window: 1001;
+      --z-index-notifications: 2000;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      background-color: var(--color-primary-bg);
+      color: var(--color-text-primary);
+    }
+    html, body, #root { 
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    #root { /* This remains the main app container */
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden; 
+        background-color: var(--color-primary-app);
+    }
+    #modal-root { /* This is for portals, should not affect layout of #root but should stack above it */
+      position: relative; 
+      z-index: var(--z-index-portal-root); 
+      height: 0; /* Does not take up layout space */
+      overflow-x: hidden; /* Consistent with #root */
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.6.2",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "recharts": "https://esm.sh/recharts@^3.0.0",
+    "jspdf": "https://esm.sh/jspdf@^3.0.1",
+    "jspdf-autotable": "https://esm.sh/jspdf-autotable@^5.0.2",
+    "@google/genai": "https://esm.sh/@google/genai@^1.6.0",
+    "@capacitor/cli": "https://esm.sh/@capacitor/cli@^7.4.0",
+    "react-dom": "https://esm.sh/react-dom@^19.1.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="text-gray-200">
+  <div id="root"></div>
+  <div id="modal-root"></div> <!-- Added modal root here -->
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

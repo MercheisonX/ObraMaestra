@@ -1,0 +1,8 @@
+{
+  "name": "ObraMaestra Frontend",
+  "description": "A comprehensive web application for managing construction jobs, clients, finances, and generating quotes, powered by Gemini API for intelligent assistance.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "prompt": ""
+}
