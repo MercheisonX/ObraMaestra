@@ -20,7 +20,7 @@ interface MaterialCostDetail {
 interface MaterialCostsDetailModalProps {
   isOpen: boolean;
   onClose: () => void;
-  costs: MaterialCostDetail[]; // Derived data from FinancesPage
+  costs: MaterialCostDetail[];
 }
 
 const MaterialCostsDetailModal: React.FC<MaterialCostsDetailModalProps> = ({ isOpen, onClose, costs }) => {
@@ -46,37 +46,37 @@ const MaterialCostsDetailModal: React.FC<MaterialCostsDetailModalProps> = ({ isO
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Detalle de Costos de Materiales" size="xl">
       <div className="space-y-4">
-        {aggregatedCosts.length === 0 && <p className="text-gray-400">No hay datos de costos de materiales para mostrar.</p>}
+        {aggregatedCosts.length === 0 && <p className="text-[var(--color-text-secondary)]">No hay datos de costos de materiales para mostrar.</p>}
 
         {aggregatedCosts.length > 0 && (
              <div className="mb-6">
-                <h4 className="text-md font-semibold text-white mb-2">Costos Totales por Material</h4>
+                <h4 className="text-md font-semibold text-[var(--color-text-primary)] mb-2">Costos Totales por Material</h4>
                 <ResponsiveContainer width="100%" height={250}>
                     <BarChart data={aggregatedCosts} layout="vertical" margin={{ top: 5, right: 20, left: 100, bottom: 5 }}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-                        <XAxis type="number" tickFormatter={(value) => CURRENCY_FORMATTER.format(value)} tick={{ fill: '#9ca3af', fontSize: 10 }} />
-                        <YAxis dataKey="materialName" type="category" tick={{ fill: '#9ca3af', fontSize: 10 }} width={100} interval={0} />
+                        <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                        <XAxis type="number" tickFormatter={(value) => CURRENCY_FORMATTER.format(value)} tick={{ fill: 'var(--color-text-secondary)', fontSize: 10 }} />
+                        <YAxis dataKey="materialName" type="category" tick={{ fill: 'var(--color-text-secondary)', fontSize: 10 }} width={100} interval={0} />
                         <Tooltip 
                             formatter={(value: number) => CURRENCY_FORMATTER.format(value)}
                             contentStyle={{ backgroundColor: 'var(--color-secondary-bg)', border: '1px solid var(--color-border)', borderRadius: '0.5rem' }}
                             labelStyle={{ color: 'var(--color-text-primary)', fontWeight: 'bold' }}
                             itemStyle={{ color: 'var(--color-text-secondary)' }}
                          />
-                        <Legend wrapperStyle={{fontSize: '12px'}} />
+                        <Legend wrapperStyle={{fontSize: '12px', color: 'var(--color-text-secondary)'}} />
                         <Bar dataKey="totalSpent" name="Total Gastado" fill="var(--color-accent)" radius={[0, 4, 4, 0]} barSize={15} />
                     </BarChart>
                 </ResponsiveContainer>
             </div>
         )}
 
-        <h4 className="text-md font-semibold text-white mt-4 mb-2">Desglose de Costos por Trabajo:</h4>
+        <h4 className="text-md font-semibold text-[var(--color-text-primary)] mt-4 mb-2">Desglose de Costos por Trabajo:</h4>
         <div className="max-h-[40vh] overflow-y-auto space-y-3 pr-2 styled-scrollbar">
           {[...costs].sort((a,b) => b.totalCost - a.totalCost).map((cost, index) => (
             <div key={`${cost.jobId}-${cost.materialId}-${index}`} className="bg-[var(--color-primary-app)] p-3 rounded-md text-sm border-l-2 border-[var(--color-accent)]">
-              <p className="font-semibold text-white">{cost.materialName}</p>
-              <p className="text-gray-300">Trabajo: {cost.jobName}</p>
-              <p className="text-gray-400">Costo Total: <span className="text-[var(--color-success)] font-medium">{CURRENCY_FORMATTER.format(cost.totalCost)}</span></p>
-              <p className="text-xs text-gray-500">
+              <p className="font-semibold text-[var(--color-text-primary)]">{cost.materialName}</p>
+              <p className="text-[var(--color-text-secondary)]">Trabajo: {cost.jobName}</p>
+              <p className="text-[var(--color-text-secondary)]">Costo Total: <span className="text-[var(--color-success)] font-medium">{CURRENCY_FORMATTER.format(cost.totalCost)}</span></p>
+              <p className="text-xs text-[var(--color-text-muted)]">
                 ({cost.quantity} {cost.unit} @ {CURRENCY_FORMATTER.format(cost.unitPrice)}/{cost.unit}) - Inicio Trabajo: {new Date(cost.jobStartDate).toLocaleDateString('es-CO')}
               </p>
             </div>

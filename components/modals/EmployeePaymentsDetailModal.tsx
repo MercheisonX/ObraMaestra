@@ -19,7 +19,7 @@ interface EmployeePaymentDetail {
 interface EmployeePaymentsDetailModalProps {
   isOpen: boolean;
   onClose: () => void;
-  payments: EmployeePaymentDetail[]; // Derived data from FinancesPage
+  payments: EmployeePaymentDetail[];
 }
 
 const EmployeePaymentsDetailModal: React.FC<EmployeePaymentsDetailModalProps> = ({ isOpen, onClose, payments }) => {
@@ -49,7 +49,7 @@ const EmployeePaymentsDetailModal: React.FC<EmployeePaymentsDetailModalProps> = 
         
         {aggregatedPayments.length > 0 && (
             <div className="mb-6">
-                <h4 className="text-md font-semibold text-white mb-2">Pagos Totales por Empleado</h4>
+                <h4 className="text-md font-semibold text-[var(--color-text-primary)] mb-2">Pagos Totales por Empleado</h4>
                 <ResponsiveContainer width="100%" height={250}>
                     <BarChart data={aggregatedPayments} layout="vertical" margin={{ top: 5, right: 20, left: 80, bottom: 5 }}>
                         <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
@@ -68,14 +68,14 @@ const EmployeePaymentsDetailModal: React.FC<EmployeePaymentsDetailModalProps> = 
             </div>
         )}
 
-        <h4 className="text-md font-semibold text-white mt-4 mb-2">Desglose de Pagos:</h4>
+        <h4 className="text-md font-semibold text-[var(--color-text-primary)] mt-4 mb-2">Desglose de Pagos:</h4>
         <div className="max-h-[40vh] overflow-y-auto space-y-3 pr-2 styled-scrollbar">
           {[...payments].sort((a,b) => b.amountPaid - a.amountPaid).map((payment, index) => (
             <div key={`${payment.jobId}-${payment.employeeId}-${index}`} className="bg-[var(--color-primary-app)] p-3 rounded-md text-sm border-l-2 border-[var(--color-accent)]">
-              <p className="font-semibold text-white">{payment.employeeName}</p>
+              <p className="font-semibold text-[var(--color-text-primary)]">{payment.employeeName}</p>
               <p className="text-[var(--color-text-secondary)]">Trabajo: {payment.jobName}</p>
               <p className="text-[var(--color-text-secondary)]">Monto Pagado: <span className="text-[var(--color-success)] font-medium">{CURRENCY_FORMATTER.format(payment.amountPaid)}</span></p>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-[var(--color-text-muted)]">
                 ({payment.workdays} días @ {CURRENCY_FORMATTER.format(payment.dailySalary)}/día) - Inicio Trabajo: {new Date(payment.jobStartDate).toLocaleDateString('es-CO')}
               </p>
             </div>
